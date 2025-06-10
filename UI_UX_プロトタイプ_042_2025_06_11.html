@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>音量調整付き単語読み上げ</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      margin-top: 50px;
+    }
+    .word-button {
+      padding: 10px 20px;
+      margin: 5px;
+      font-size: 18px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .confirm-button {
+      padding: 12px 30px;
+      margin-top: 20px;
+      background-color: #007bff;
+      color: white;
+      font-size: 20px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    #output {
+      margin-top: 20px;
+      font-size: 22px;
+      color: #333;
+    }
+    .volume-control {
+      margin-top: 20px;
+    }
+    .back-button {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background: #eee;
+      color: #007bff;
+      padding: 10px 24px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 1.1rem;
+      border: 1px solid #ccc;
+      transition: background 0.2s;
+      z-index: 100;
+      font-weight: bold;
+    }
+    .back-button:hover {
+      background: #d0e7ff;
+    }
+  </style>
+</head>
+<body>
+  <!-- 戻るボタン -->
+  <a href="UI_UX_06_07_04.html" class="back-button">戻る</a>
+
+  <h1>単語ボタン読み上げ</h1>
+
+  <div id="buttons">
+    <button class="word-button">りんご</button>
+    <button class="word-button">ばなな</button>
+    <button class="word-button">みかん</button>
+    <button class="word-button">ぶどう</button>
+    <button class="word-button">パイナップル</button>
+    <button class="word-button">すいか</button>
+    <button class="word-button">もも</button>
+    <button class="word-button">さくらんぼ</button>
+    <button class="word-button">メロン</button>
+    <button class="word-button">レモン</button>
+    <button class="word-button">キウイ</button>
+    <button class="word-button">グレープフルーツ</button>
+    <button class="word-button">マンゴー</button>
+    <button class="word-button">ブルーベリー</button>
+    <button class="word-button">ラズベリー</button>
+    <button class="word-button">いちご</button>
+    <button class="word-button">カシス</button>
+    <button class="word-button">ライチ</button>
+    <button class="word-button">ドリアン</button>
+    <button class="word-button">アボカド</button>
+    <button class="word-button">トマト</button>
+    <button class="word-button">なす</button>
+    <button class="word-button">きゅうり</button>
+    <button class="word-button">キャベツ</button>
+    <button class="word-button">レタス</button>
+    <button class="word-button">にんじん</button>
+    <button class="word-button">だいこん</button>
+    <button class="word-button">たまねぎ</button>
+    <button class="word-button">じゃがいも</button>
+    <button class="word-button">さつまいも</button>
+    <button class="word-button">かぼちゃ</button>
+    <button class="word-button">ほうれんそう</button>
+    <button class="word-button">ブロッコリー</button>
+    <button class="word-button">カリフラワー</button>
+    <button class="word-button">ピーマン</button>
+    <button class="word-button">とうもろこし</button>
+    <button class="word-button">ごぼう</button>
+    <button class="word-button">れんこん</button>
+    <button class="word-button">しいたけ</button>
+    <button class="word-button">しめじ</button>
+    <button class="word-button">まいたけ</button>
+    <button class="word-button">えのき</button>
+    <button class="word-button">たけのこ</button>
+    <button class="word-button">こんにゃく</button>
+    <button class="word-button">もやし</button>
+    <button class="word-button">みつば</button>
+    <button class="word-button">せり</button>
+    <button class="word-button">みょうが</button>
+    <button class="word-button">パセリ</button>
+    <button class="word-button">うさぎ</button>
+    <button class="word-button">ぞう</button>
+    <button class="word-button">きつね</button>
+    <button class="word-button">くま</button>
+    <button class="word-button">さる</button>
+    <button class="word-button">とら</button>
+    <button class="word-button">いぬ</button>
+    <button class="word-button">ねこ</button>
+    <button class="word-button">しか</button>
+    <button class="word-button">たぬき</button>
+    <button class="word-button">かめ</button>
+    <button class="word-button">かえる</button>
+    <button class="word-button">へび</button>
+    <button class="word-button">とり</button>
+    <button class="word-button">すずめ</button>
+    <button class="word-button">はと</button>
+    <button class="word-button">からす</button>
+    <button class="word-button">わし</button>
+    <button class="word-button">たか</button>
+    <button class="word-button">ぺんぎん</button>
+    <button class="word-button">らいおん</button>
+    <button class="word-button">ひつじ</button>
+    <button class="word-button">やぎ</button>
+    <button class="word-button">うし</button>
+    <button class="word-button">うま</button>
+    <button class="word-button">ぶた</button>
+    <button class="word-button">にわとり</button>
+    <button class="word-button">あひる</button>
+    <button class="word-button">かも</button>
+    <button class="word-button">さかな</button>
+    <button class="word-button">いくら</button>
+    <button class="word-button">たこ</button>
+    <button class="word-button">いか</button>
+    <button class="word-button">えび</button>
+    <button class="word-button">かに</button>
+    <button class="word-button">ほたて</button>
+    <button class="word-button">しじみ</button>
+    <button class="word-button">あさり</button>
+    <button class="word-button">まぐろ</button>
+    <button class="word-button">さけ</button>
+    <button class="word-button">さば</button>
+    <button class="word-button">いわし</button>
+    <button class="word-button">さんま</button>
+    <button class="word-button">たら</button>
+    <button class="word-button">かれい</button>
+    <button class="word-button">ひらめ</button>
+    <button class="word-button">あじ</button>
+    <button class="word-button">さより</button>
+    <button class="word-button">すずき</button>
+  </div>
+
+  <div class="volume-control">
+    <label for="volume">音量: </label>
+    <input type="range" id="volume" min="0" max="1" step="0.1" value="1">
+  </div>
+
+  <button class="confirm-button" id="speak">決定</button>
+
+  <div id="output"></div>
+
+  <script>
+    let selectedWords = [];
+
+    // ボタン押下で単語を追加
+    document.querySelectorAll('.word-button').forEach(button => {
+      button.addEventListener('click', () => {
+        selectedWords.push(button.textContent);
+        document.getElementById('output').textContent = selectedWords.join(' ');
+      });
+    });
+
+    // 読み上げ（決定）
+    document.getElementById('speak').addEventListener('click', () => {
+      const phrase = selectedWords.join(' ');
+      const volume = parseFloat(document.getElementById('volume').value);
+
+      if (phrase) {
+        const utterance = new SpeechSynthesisUtterance(phrase);
+        utterance.lang = 'ja-JP';
+        utterance.volume = volume; // 🔊 音量設定
+
+        speechSynthesis.speak(utterance);
+
+        selectedWords = [];  // リセット
+        document.getElementById('output').textContent = '';
+      }
+    });
+  </script>
+
+</body>
+</html>
