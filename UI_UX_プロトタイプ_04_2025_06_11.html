@@ -9,7 +9,7 @@
             margin: 0;
             padding: 0;
             font-family: sans-serif;
-            overflow: hidden; /* スクロールバーを非表示にする */
+            overflow: hidden;
         }
         body {
             height: 100vh;
@@ -18,16 +18,16 @@
         }
         .container {
             display: flex;
-            height: calc(100vh - 120px); /* ヘッダー分を引く */
+            height: calc(100vh - 15vh); /* ヘッダー+フッター分を引く */
         }
         .left {
             flex: 1;
             background-color: #f0f0f0;
-            padding: 0 20px 20px 20px; /* 上のpaddingを0に */
+            padding: 0 20px 20px 20px;
             box-sizing: border-box;
             display: flex;
             flex-direction: column;
-            justify-content: flex-start; /* 上詰めに */
+            justify-content: flex-start;
         }
         .right {
             flex: 1;
@@ -55,56 +55,121 @@
         .header-row {
             display: flex;
             background: #98e0ff;
-            border-bottom: 2px solid #fff;
-            font-size: 3rem;
+            font-size: 2.2vw;
             font-family: sans-serif;
             font-weight: bold;
             text-align: center;
-            height: 120px;
+            height: 10vh;
+            min-height: 60px;
             align-items: center;
+            position: relative;
+            padding: 0;
+        }
+        .header-left {
+            flex: 1;
+            display: flex;
+            align-items: flex-end;
+            height: 100%;
+            padding-left: 20px;
+        }
+        .header-icon-link {
+            display: flex;
+            align-items: center;
+            height: 100%;
+        }
+        .header-icon {
+            height: 8vh;
+            width: auto;
+            max-width: 200px;
+            object-fit: contain;
+            margin-top: 15px;
+        }
+        .header-right {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            height: 100%;
+            position: relative;
         }
         .header-cell {
-            flex: 1;
-            border-right: 6px solid #fff;
-        }
-        .header-cell:last-child {
-            border-right: none;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 10px;
+            margin-right: 10px;
         }
         .header-cell a {
-                color: inherit;
-                text-decoration: none;
-                display: block;
-                width: 100%;
-                height: 100%;
+            color: inherit;
+            text-decoration: none;
+            display: block;
+            height: 100%;
+            line-height: 10vh;
+            padding: 0 10px;
         }
         .header-cell a:hover {
-                text-decoration: underline;
-        }  
+            text-decoration: underline;
+        }
+        .lang-select {
+            margin-left: 20px;
+            font-size: 1.1rem;
+            height: 2.2em;
+        }
+        .footer-row {
+            width: 100%;
+            height: 5vh;
+            min-height: 30px;
+            background: #98e0ff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            color: #333;
+            font-family: sans-serif;
+            font-weight: bold;
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            z-index: 100;
+        }
         ul {
             list-style: none;
             padding-left: 0;
             margin: 0;
             display: flex;
             flex-direction: column;
-            justify-content: flex-start; /* 上詰めに */
+            justify-content: flex-start;
             height: 100%;
         }
         li {
             font-size: 1.5rem;
-            padding: 10px 0; /* 上下の余白を減らす */
+            padding: 10px 0;
             border-bottom: 1px solid #ccc;
         }
     </style>
 </head>
 <body>
-      <!-- ここからヘッダー -->
+    <!-- ここからヘッダー -->
     <div class="header-row">
-    <div class="header-cell"><a href="UI_UX_06_07_01.html">入力</a></div>
-    <div class="header-cell"><a href="リンク先URL">変換</a></div>
-    <div class="header-cell"><a href="リンク先URL">設定</a></div>
-    <div class="header-cell"><a href="UI_UX_06_07_04.html">実行</a></div>
+        <div class="header-left">
+            <a href="" class="header-icon-link">
+                <img src="画像1.png" alt="アイコン" class="header-icon">
+            </a>
+        </div>
+        <div class="header-right">
+            <div class="header-cell"><a id="navInput" href="UI_UX_06_07_01.html">入力</a></div>
+            <div class="header-cell"><a id="navConvert" href="リンク先URL">変換</a></div>
+            <div class="header-cell"><a id="navSetting" href="リンク先URL">設定</a></div>
+            <div class="header-cell"><a id="navRun" href="UI_UX_06_07_04.html">実行</a></div>
+            <select class="lang-select" id="langSelect">
+                <option value="ja">日本語</option>
+                <option value="en">English</option>
+                <option value="zh">中文</option>
+            </select>
+        </div>
     </div>
-<!-- ここまでヘッダー -->
+    <!-- ここまでヘッダー -->
     <div class="container">
         <div class="left">
             <ul>
@@ -120,8 +185,70 @@
             </ul>
         </div>
         <div class="right">
-            <a href="UI_UX_06_07_04_02.html" class="enter-button">実行</a>
+            <a href="UI_UX_06_07_04_02.html" class="enter-button" id="enterBtn">実行</a>
         </div>
     </div>
+    <div class="footer-row">
+        © 2025 Your University Name
+    </div>
+    <script>
+        const translations = {
+            ja: {
+                navInput: "入力",
+                navConvert: "変換",
+                navSetting: "設定",
+                navRun: "実行",
+                enterBtn: "実行",
+                listTitle: "追加リスト",
+                items: ["項目1", "項目2", "項目3", "項目4", "項目5", "項目6", "項目7", "項目8"]
+            },
+            en: {
+                navInput: "Input",
+                navConvert: "Convert",
+                navSetting: "Settings",
+                navRun: "Run",
+                enterBtn: "Run",
+                listTitle: "Add List",
+                items: ["Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 6", "Item 7", "Item 8"]
+            },
+            zh: {
+                navInput: "输入",
+                navConvert: "转换",
+                navSetting: "设置",
+                navRun: "执行",
+                enterBtn: "执行",
+                listTitle: "添加列表",
+                items: ["项目1", "项目2", "项目3", "项目4", "项目5", "项目6", "项目7", "项目8"]
+            }
+        };
+
+        const langSelect = document.getElementById('langSelect');
+        let currentLang = 'ja';
+
+        function updateLang(lang) {
+            currentLang = lang;
+            // ヘッダー
+            document.getElementById('navInput').textContent = translations[lang].navInput;
+            document.getElementById('navConvert').textContent = translations[lang].navConvert;
+            document.getElementById('navSetting').textContent = translations[lang].navSetting;
+            document.getElementById('navRun').textContent = translations[lang].navRun;
+            // ボタン
+            document.getElementById('enterBtn').textContent = translations[lang].enterBtn;
+            // リストタイトル
+            document.querySelector('.left h1').textContent = translations[lang].listTitle;
+            // リスト項目
+            const lis = document.querySelectorAll('.left li');
+            translations[lang].items.forEach((item, i) => {
+                if (lis[i]) lis[i].textContent = item;
+            });
+        }
+
+        langSelect.addEventListener('change', (e) => {
+            updateLang(e.target.value);
+        });
+
+        // 初期化
+        updateLang(currentLang);
+    </script>
 </body>
 </html>
