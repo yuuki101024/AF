@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>UI/UX統合プロトタイプ</title>
+  <link rel="stylesheet" href="UI_UX_af.css">
+</head>
+<body>
+  <!-- ヘッダー -->
+  <div class="header-row">
+    <div class="header-left">
+      <a href="#" class="header-icon-link">
+        <img src="画像1.png" alt="アイコン" class="header-icon">
+      </a>
+    </div>
+    <div class="header-right">
+      <div class="header-cell"><a id="navInput" data-page="input">入力</a></div>
+      <div class="header-cell"><a id="navConvert" data-page="convert">変換</a></div>
+      <div class="header-cell"><a id="navSetting" data-page="setting">設定</a></div>
+      <div class="header-cell"><a id="navRun" data-page="run">実行</a></div>
+      <select class="lang-select" id="langSelect">
+        <option value="ja">日本語</option>
+        <option value="en">English</option>
+        <option value="zh">中文</option>
+      </select>
+    </div>
+  </div>
+  <!-- 入力ページ -->
+  <div id="page-input" class="main-content">
+    <div class="center-text" id="centerText">単語もしくは、文を入力してください</div>
+    <form class="center-form" id="inputForm">
+      <input type="text" id="inputText" placeholder="ここに入力" maxlength="20">
+      <input type="submit" value="送信" id="submitBtn">
+    </form>
+    <div class="result-message" id="resultMessage"></div>
+  </div>
+  <!-- 変換ページ（今は空/ダミー） -->
+  <div id="page-convert" style="display:none; height:calc(90vh); display:flex; align-items:center; justify-content:center;">
+    <h2>変換ページ（ダミー）</h2>
+  </div>
+  <!-- 実行ページ（追加リスト＋実行ボタン） -->
+  <div id="page-run" class="container" style="display:none;">
+    <div class="left">
+      <ul id="addedListUl">
+        <h1 id="addedListTitle">追加リスト</h1>
+        <!-- ここにJSでリスト項目を追加 -->
+      </ul>
+      <div id="deleteModeArea" style="margin-top:20px; text-align:center;">
+        <button id="toggleDeleteModeBtn" type="button">削除モード</button>
+        <button id="deleteCheckedBtn" type="button" style="display:none; margin-left:10px;">チェックした項目を削除</button>
+      </div>
+    </div>
+    <div class="right">
+      <button class="enter-button" id="enterBtn">実行</button>
+    </div>
+  </div>
+  <!-- 返還後の実行ページ（単語ボタン読み上げ） -->
+  <div id="page-run-result" class="main-content-run" style="display:none;">
+    <h1 id="mainTitle">単語ボタン読み上げ</h1>
+    <div id="buttons">
+      <!-- ボタンはJSで生成 -->
+    </div>
+    <div class="volume-control">
+      <label for="volume" id="volumeLabel">音量: </label>
+      <input type="range" id="volume" min="0" max="1" step="0.1" value="1">
+    </div>
+    <button class="confirm-button" id="speak">決定</button>
+    <div id="output"></div>
+  </div>
+  <!-- 設定ページ -->
+  <div id="page-setting">
+    <h2>設定ページ</h2>
+    <div class="setting-row">
+      <div class="setting-block">
+        <label for="settingVolume">音量設定：</label>
+        <input type="range" id="settingVolume" min="0" max="1" step="0.1" value="1">
+        <span id="settingVolumeValue">1.0</span>
+      </div>
+      <div class="setting-block">
+        <label for="modeSelect">モード変更：</label>
+        <select id="modeSelect">
+          <option value="normal">ノーマル</option>
+          <option value="advanced">アドバンス</option>
+        </select>
+        <span class="mode-note">（現状は効果なし）</span>
+      </div>
+    </div>
+  </div>
+  <div class="footer-row">
+    © 2025 
+  </div>
+  <script src="UI_UX_af.js"></script>
+</body>
+</html>

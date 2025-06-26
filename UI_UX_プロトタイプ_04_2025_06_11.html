@@ -192,63 +192,87 @@
         © 2025 
     </div>
     <script>
-        const translations = {
-            ja: {
-                navInput: "入力",
-                navConvert: "変換",
-                navSetting: "設定",
-                navRun: "実行",
-                enterBtn: "実行",
-                listTitle: "追加リスト",
-                items: ["項目1", "項目2", "項目3", "項目4", "項目5", "項目6", "項目7", "項目8"]
-            },
-            en: {
-                navInput: "Input",
-                navConvert: "Convert",
-                navSetting: "Settings",
-                navRun: "Run",
-                enterBtn: "Run",
-                listTitle: "Add List",
-                items: ["Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 6", "Item 7", "Item 8"]
-            },
-            zh: {
-                navInput: "输入",
-                navConvert: "转换",
-                navSetting: "设置",
-                navRun: "执行",
-                enterBtn: "执行",
-                listTitle: "添加列表",
-                items: ["项目1", "项目2", "项目3", "项目4", "项目5", "项目6", "项目7", "项目8"]
-            }
-        };
+    const translations = {
+    ja: {
+      navInput: "入力",
+      navConvert: "変換",
+      navSetting: "設定",
+      navRun: "実行",
+      centerText: "単語もしくは、文を入力してください",
+      placeholder: "ここに入力",
+      submit: "送信",
+      added: v => v + "を追加しました。"
+    },
+    en: {
+      navInput: "Input",
+      navConvert: "Convert",
+      navSetting: "Settings",
+      navRun: "Run",
+      centerText: "Please enter a word or sentence",
+      placeholder: "Enter here",
+      submit: "Submit",
+      added: v => `"${v}" has been added.`
+    },
+    zh: {
+      navInput: "输入",
+      navConvert: "转换",
+      navSetting: "设置",
+      navRun: "执行",
+      centerText: "请输入单词或句子",
+      placeholder: "在此输入",
+      submit: "提交",
+      added: v => `已添加：${v}`
+    }
+  };
 
-        const langSelect = document.getElementById('langSelect');
-        let currentLang = 'ja';
+    const form = document.getElementById('inputForm');
+    const input = document.getElementById('inputText');
+    const result = document.getElementById('resultMessage');
+    const centerText = document.getElementById('centerText');
+    const submitBtn = document.getElementById('submitBtn');
+    const langSelect = document.getElementById('langSelect');
 
-        function updateLang(lang) {
-            currentLang = lang;
-            // ヘッダー
-            document.getElementById('navInput').textContent = translations[lang].navInput;
-            document.getElementById('navConvert').textContent = translations[lang].navConvert;
-            document.getElementById('navSetting').textContent = translations[lang].navSetting;
-            document.getElementById('navRun').textContent = translations[lang].navRun;
-            // ボタン
-            document.getElementById('enterBtn').textContent = translations[lang].enterBtn;
-            // リストタイトル
-            document.querySelector('.left h1').textContent = translations[lang].listTitle;
-            // リスト項目
-            const lis = document.querySelectorAll('.left li');
-            translations[lang].items.forEach((item, i) => {
-                if (lis[i]) lis[i].textContent = item;
-            });
+    let currentLang = 'ja';
+
+    function updateLang(lang) {
+        currentLang = lang;
+        langSelect.value = lang;
+        // ヘッダー
+        document.getElementById('navInput').textContent = translations[lang].navInput;
+        document.getElementById('navConvert').textContent = translations[lang].navConvert;
+        document.getElementById('navSetting').textContent = translations[lang].navSetting;
+        document.getElementById('navRun').textContent = translations[lang].navRun;
+        // メイン
+        centerText.textContent = translations[lang].centerText;
+        input.placeholder = translations[lang].placeholder;
+        submitBtn.value = translations[lang].submit;
+        result.textContent = "";
+    }
+
+    langSelect.addEventListener('change', (e) => {
+        localStorage.setItem('uiux_lang', e.target.value);
+        updateLang(e.target.value);
+    });
+
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const value = input.value.trim();
+        if (value) {
+        result.textContent = translations[currentLang].added(value);
+        input.value = "";
+        } else {
+        result.textContent = "";
         }
+    });
 
-        langSelect.addEventListener('change', (e) => {
-            updateLang(e.target.value);
-        });
-
-        // 初期化
+    // 初期化
+    const savedLang = localStorage.getItem('uiux_lang');
+    if (savedLang && translations[savedLang]) {
+        langSelect.value = savedLang;
+        updateLang(savedLang);
+    } else {
         updateLang(currentLang);
+    }
     </script>
 </body>
 </html>
