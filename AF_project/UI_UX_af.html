@@ -10,7 +10,7 @@
   <div class="header-row">
     <div class="header-left">
       <a href="#" class="header-icon-link">
-        <img src="画像1.png" alt="アイコン" class="header-icon">
+        <img src="rogo.png" alt="アイコン" class="header-icon">
       </a>
     </div>
     <div class="header-right">
@@ -34,16 +34,17 @@
     </form>
     <div class="result-message" id="resultMessage"></div>
   </div>
-  <!-- 変換ページ（今は空/ダミー） -->
-  <div id="page-convert" style="display:none; height:calc(90vh); display:flex; align-items:center; justify-content:center;">
-    <h2>変換ページ（ダミー）</h2>
+  <!-- 変換ページ（準備中メッセージ）／初期表示時だけ隠す -->
+  <div id="page-convert" class="convert-page" style="display:none">
+    <div class="signboard">
+      <img id="convertSignboardImg" src="" alt="準備中です">
+    </div>
   </div>
   <!-- 実行ページ（追加リスト＋実行ボタン） -->
   <div id="page-run" class="container" style="display:none;">
     <div class="left">
       <ul id="addedListUl">
         <h1 id="addedListTitle">追加リスト</h1>
-        <!-- ここにJSでリスト項目を追加 -->
       </ul>
       <div id="deleteModeArea" style="margin-top:20px; text-align:center;">
         <button id="toggleDeleteModeBtn" type="button">削除モード</button>
@@ -72,12 +73,7 @@
     <h2>設定ページ</h2>
     <div class="setting-row">
       <div class="setting-block">
-        <label for="settingVolume">音量設定：</label>
-        <input type="range" id="settingVolume" min="0" max="1" step="0.1" value="1">
-        <span id="settingVolumeValue">1.0</span>
-      </div>
-      <div class="setting-block">
-        <label for="modeSelect">モード変更：</label>
+        <label for="modeSelect">モード変更</label>
         <select id="modeSelect">
           <option value="normal">ノーマル</option>
           <option value="advanced">アドバンス</option>

@@ -7,8 +7,8 @@ body {
 }
 .header-row {
   display: flex;
-  background: #98e0ff;
-  font-size: 2.2vw;
+  background: #549bb9;
+  font-size: 1.5vw;
   font-family: sans-serif;
   font-weight: bold;
   text-align: center;
@@ -67,12 +67,12 @@ body {
   margin-right: 10px;
 }
 .header-cell a {
-  color: inherit;
+  color: #ffffff;
   text-decoration: none;
   display: block;
   padding: 0 10px;
   cursor: pointer;
-  font-size: 2rem;
+  font-size: 1.5rem;
 }
 /* スマホ用にフォントサイズを大きくする */
 @media (max-width: 600px) {
@@ -87,6 +87,9 @@ body {
     cursor: pointer;
     font-size: 2rem !important; /* ← ここを追加・調整 */
   }
+  .header-cell a {
+  font-size: 1.6rem !important;  /* デフォルト 2rem → 1.6rem に */
+  }
 }
 .header-cell a:hover {
   text-decoration: underline;
@@ -100,7 +103,7 @@ body {
   width: 100%;
   height: 5vh;
   min-height: 30px;
-  background: #98e0ff;
+  background: #549bb9;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -173,13 +176,14 @@ body {
 }
 /* --- 実行ページ --- */
 .main-content-run {
-  height: calc(90vh);
+  /* フッター分を除いたビューポート全体にしつつ、縦中央配置 */
+  height: calc(100vh - 5vh);
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;  /* 垂直方向に中央揃え */
   position: relative;
-  padding-top: 30px;
+  padding: 0 0 5vh;         /* 下にフッター分の余白を確保 */
 }
 .word-button {
   padding: 10px 20px;
@@ -209,11 +213,11 @@ body {
 /* --- 実行ページ（変換後） --- */
 .container {
   display: flex;
-  height: calc(100vh - 15vh);
+  height: calc(100vh - 5vh);
 }
 .left {
   flex: 1;
-  background-color: #f0f0f0;
+  background-color: hsl(216, 100%, 91%);
   padding: 0 20px 20px 20px;
   box-sizing: border-box;
   display: flex;
@@ -258,79 +262,54 @@ li {
   border-bottom: 1px solid #ccc;
 }
 #page-setting {
-  display: none;
-  height: auto;
-  min-height: 400px;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  background: #f8fbff;
-  border-radius: 18px;
-  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
-  margin: 0;
-  max-width: 600px;
-  position: fixed;
+  display: none;                   /* 初期は非表示 */
+  position: fixed;                 /* 画面中央に固定 */
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  padding: 60px 0 60px 0;
-  z-index: 9999;
-  overflow-y: auto;
+  width: 90%;                      /* モバイル～PCまで対応 */
+  max-width: 400px;
+  padding: 1em;                    /* 内側余白 */
+  background: #fff;                /* 背景色 */
+  border: 1px solid #ccc;          /* 薄い境界線 */
+  box-shadow: none;                /* 影はなし */
+  border-radius: 4px;              /* 軽い角丸 */
+  z-index: 1000;                   /* 前面表示 */
+  overflow: visible;               /* スクロールなし */
 }
-.show-setting {
-  display: flex !important;
+
+/* .show-setting が付くと表示 */
+#page-setting.show-setting {
+  display: block;
 }
+
+/* 見出し */
 #page-setting h2 {
-  margin-bottom: 32px;
-  font-size: 2.6rem;
-  color: #007bff;
-  letter-spacing: 0.1em;
-}
-#page-setting .setting-row {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  gap: 24px;
-  margin: 32px 0;
-}
-#page-setting .setting-block {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  min-width: 320px;
-  width: 100%;
-  max-width: 500px;
-  margin: 0 auto;
-  font-size: 1.4rem;
-}
-#page-setting label {
-  font-size: 1.4rem;
-  margin-right: 12px;
+  margin: 0 0 0.5em;
+  font-size: 1.2rem;
   color: #333;
-  white-space: nowrap;
 }
-#settingVolume, #modeSelect {
-  font-size: 1.3rem;
-  margin-right: 10px;
-  min-width: 140px;
+
+/* ラベル＋セレクト */
+#page-setting label {
+  display: block;
+  margin: 0 0 0.25em;
+  font-size: 1rem;
+  color: #333;
 }
-#settingVolumeValue {
-  font-size: 1.3rem;
-  color: #007bff;
-  margin-left: 8px;
+#page-setting select {
+  width: 100%;
+  padding: 0.5em;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background: #fafafa;
+  margin-bottom: 1em;
 }
 #modeSelect {
   padding: 8px 18px;
   border-radius: 6px;
   border: 1px solid #ccc;
-}
-#page-setting .mode-note {
-  color: #888;
-  font-size: 0.95em;
-  margin-left: 10px;
 }
 @media (max-width: 600px) {
   #page-setting {
@@ -352,11 +331,53 @@ li {
     max-width: 100%;
     font-size: 1.1rem;
   }
-  #settingVolume, #modeSelect {
-    font-size: 1.1rem;
-    min-width: 80px;
-  }
-  #settingVolumeValue {
-    font-size: 1.1rem;
-  }
+}
+/* --- 変換ページ用 --- */
+.convert-page {
+  display: none;               /* showPage('convert') で切り替え */
+  height: calc(90vh);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.signboard {
+  border: none !important;
+  background-color: #ffffff;
+  padding: 2rem 3rem;
+  border-radius: 1rem;
+  box-shadow: none !important;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #333;
+  text-align: center;
+}
+/* --- 画像看板のスタイル --- */
+.signboard img {
+  max-width: 80%;           /* 横幅はコンテナに対して 80% */
+  height: auto;             /* アスペクト比を維持 */
+  border-radius: 1rem;      /* 角丸 */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* 軽い影 */
+}
+/* --- 変換ページをヘッダーとフッターの間に固定配置 --- */
+.convert-page {
+  position: fixed;
+  top: 10vh;          /* ヘッダーの下 */
+  bottom: 5vh;        /* フッターの上 */
+  left: 0;
+  right: 0;
+  padding: 2rem;      /* 上下に余白 */
+  display: none;      /* showPage('convert') で切り替え */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  overflow: auto;     /* 万が一画像が大きくてもスクロール可能に */
+}
+
+/* --- 看板画像をコンテナいっぱいに拡大縮小 --- */
+.signboard img {
+  max-width: 20%;
+  max-height: 20%;
+  display: block;
+  margin: auto;
 }

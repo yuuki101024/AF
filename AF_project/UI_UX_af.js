@@ -69,6 +69,7 @@ function showPage(page) {
   if (page === 'run-result') initRunPage();
   if (page === 'input') resetInputPage();
   if (page === 'run') resetConvertPage();
+  if (page === 'convert') initConvertPage();
 }
 
 // --- 入力ページ ---
@@ -150,8 +151,11 @@ function initRunPage() {
   btnsDiv.innerHTML = '';
   selectedWords = [];
   document.getElementById('output').textContent = '';
-  // runWordsが空ならtranslations[currentLang].runListを使う（初期化用）
-  const words = runWords.length > 0 ? runWords : translations[currentLang].runList;
+  // runWordsが空ならtranslations[currentLang].runListを使う（初期化用）(一旦無し)
+  //const words = runWords.length > 0 ? runWords : translations[currentLang].runList;
+    // 単語を最大10つまでに制限
+  const allWords = runWords.length > 0 ? runWords : translations[currentLang].runList;
+  const words = allWords.slice(0, 10);
   words.forEach(word => {
     const btn = document.createElement('button');
     btn.className = 'word-button';
@@ -166,7 +170,7 @@ function initRunPage() {
 document.getElementById('speak').addEventListener('click', () => {
   const phrase = selectedWords.join(' ');
   // 設定ページの音量値を常に参照
-  const volume = parseFloat(document.getElementById('settingVolume').value);
+  const volume = parseFloat(document.getElementById('volume').value);
   document.getElementById('volume').value = volume; // スライダーも同期
   if (phrase) {
     const utterance = new SpeechSynthesisUtterance(phrase);
@@ -239,7 +243,24 @@ document.getElementById('enterBtn').addEventListener('click', function() {
   runWords = [...addedWords];
   showPage('run-result');
 });
-
+/**
+ * 変換ページの看板メッセージ初期化
+ *  – 通常は準備中_01
+ *  – 10% の確率で 準備中_02
+ */
+function initConvertPage() {
+//    const sign = document.getElementById('convertSignboard');
+//  let msg = '準備中_01';
+//  if (Math.random() < 0.1) {
+//    msg = '準備中_02';
+//  }
+//  sign.textContent = msg;
+  const img = document.getElementById('convertSignboardImg');
+  // 90% で「準備中_01」、10% で「準備中_02」を表示
+  const suffix = Math.random() < 0.1 ? '02' : '01';
+  img.src = `images/準備中_${suffix}.png`;
+  img.alt = `準備中_${suffix}`;
+}
 // --- 初期化 ---
 const savedLang = localStorage.getItem('uiux_lang');
 if (savedLang && translations[savedLang]) {
