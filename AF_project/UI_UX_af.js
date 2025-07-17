@@ -257,7 +257,7 @@ function initConvertPage() {
 //  sign.textContent = msg;
   const img = document.getElementById('convertSignboardImg');
   // 90% で「準備中_01」、10% で「準備中_02」を表示
-  const suffix = Math.random() < 0.1 ? '02' : '01';
+  const suffix = Math.random() < 0.01 ? '02' : '01';
   img.src = `images/準備中_${suffix}.png`;
   img.alt = `準備中_${suffix}`;
 }
